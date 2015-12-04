@@ -20,7 +20,9 @@ import java.util.Map;
  *
  * @param <Item> the dto to paginate
  * @author epo.jemba@ext.mpsa.com
+ * @deprecated This range finder will be replace by {@code org.seedstack.business.finder.BaseRangeFinder}
  */
+@Deprecated
 public abstract class BaseJpaRangeFinder<Item> implements RangeFinder<Item, Map<String, Object>> {
 
     @Override
@@ -37,7 +39,7 @@ public abstract class BaseJpaRangeFinder<Item> implements RangeFinder<Item, Map<
     /**
      * Returns a sub list of items corresponding to the required range and criteria.
      *
-     * @param range the range
+     * @param range    the range
      * @param criteria the criteria
      * @return the sub list of item
      */
