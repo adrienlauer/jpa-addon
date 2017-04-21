@@ -1,5 +1,6 @@
-# Version 3.0.2 (2017-07-31)
+# Version 4.0.0 (2017-07-31)
 
+* [new] Add a default specification translator for built-in business framework specifications. 
 * [chg] Improved error message when no JPA unit is specified.
 
 # Version 3.0.1 (2017-02-26)
