@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2013-2016, The SeedStack authors <http://seedstack.org>
+/*
+ * Copyright © 2013-2017, The SeedStack authors <http://seedstack.org>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -7,23 +7,26 @@
  */
 package org.seedstack.jpa.internal.specification;
 
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.seedstack.business.domain.AggregateRoot;
 import org.seedstack.business.specification.IdentitySpecification;
 import org.seedstack.business.spi.SpecificationConverter;
 import org.seedstack.business.spi.SpecificationTranslator;
 
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+class JpaIdentityConverter<A extends AggregateRoot<ID>, ID> implements
+    SpecificationConverter<IdentitySpecification<A, ID>, JpaTranslationContext<A>, Predicate> {
 
-class JpaIdentityConverter<A extends AggregateRoot<ID>, ID> implements SpecificationConverter<IdentitySpecification<A, ID>, JpaTranslationContext<A>, Predicate> {
-    @Override
-    @SuppressWarnings("unchecked")
-    public Predicate convert(IdentitySpecification<A, ID> specification, JpaTranslationContext<A> context, SpecificationTranslator<JpaTranslationContext<A>, Predicate> translator) {
-        ID expectedIdentifier = specification.getExpectedIdentifier();
-        Root<A> root = context.getRoot();
-        return context.getCriteriaBuilder().equal(
-                root.get(root.getModel().getId((Class<ID>) expectedIdentifier.getClass())),
-                expectedIdentifier
-        );
-    }
+  @Override
+  @SuppressWarnings("unchecked")
+  public Predicate convert(IdentitySpecification<A, ID> specification,
+      JpaTranslationContext<A> context,
+      SpecificationTranslator<JpaTranslationContext<A>, Predicate> translator) {
+    ID expectedIdentifier = specification.getExpectedIdentifier();
+    Root<A> root = context.getRoot();
+    return context.getCriteriaBuilder().equal(
+        root.get(root.getModel().getId((Class<ID>) expectedIdentifier.getClass())),
+        expectedIdentifier
+    );
+  }
 }

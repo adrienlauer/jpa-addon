@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2013-2016, The SeedStack authors <http://seedstack.org>
+/*
+ * Copyright © 2013-2017, The SeedStack authors <http://seedstack.org>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -8,39 +8,39 @@
 package org.seedstack.jpa.internal.specification;
 
 import com.google.common.base.Preconditions;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 public class JpaTranslationContext<T> {
-    private final CriteriaBuilder criteriaBuilder;
-    private final Root<T> root;
-    private Expression<?> expression;
 
-    public JpaTranslationContext(CriteriaBuilder criteriaBuilder, Root<T> root) {
-        this.criteriaBuilder = criteriaBuilder;
-        this.root = root;
-    }
+  private final CriteriaBuilder criteriaBuilder;
+  private final Root<T> root;
+  private Expression<?> expression;
 
-    public CriteriaBuilder getCriteriaBuilder() {
-        return criteriaBuilder;
-    }
+  public JpaTranslationContext(CriteriaBuilder criteriaBuilder, Root<T> root) {
+    this.criteriaBuilder = criteriaBuilder;
+    this.root = root;
+  }
 
-    public Root<T> getRoot() {
-        return root;
-    }
+  public CriteriaBuilder getCriteriaBuilder() {
+    return criteriaBuilder;
+  }
 
-    @SuppressWarnings("unchecked")
-    public <E> Expression<E> pickExpression() {
-        Preconditions.checkState(this.expression != null, "No expression has been set");
-        Expression<E> result = (Expression<E>) this.expression;
-        expression = null;
-        return result;
-    }
+  public Root<T> getRoot() {
+    return root;
+  }
 
-    public <E> void setExpression(Expression<E> expression) {
-        Preconditions.checkState(this.expression == null, "An expression is already set");
-        this.expression = expression;
-    }
+  @SuppressWarnings("unchecked")
+  public <E> Expression<E> pickExpression() {
+    Preconditions.checkState(this.expression != null, "No expression has been set");
+    Expression<E> result = (Expression<E>) this.expression;
+    expression = null;
+    return result;
+  }
+
+  public <E> void setExpression(Expression<E> expression) {
+    Preconditions.checkState(this.expression == null, "An expression is already set");
+    this.expression = expression;
+  }
 }
